@@ -49,6 +49,7 @@ func (ps Params) ByName(name string) (va string) {
 	return
 }
 
+// william 方法和对应的tree
 type methodTree struct {
 	method string
 	root   *node
@@ -56,6 +57,7 @@ type methodTree struct {
 
 type methodTrees []methodTree
 
+// william 根据方法获取相应的tree
 func (trees methodTrees) get(method string) *node {
 	for _, tree := range trees {
 		if tree.method == method {
@@ -72,6 +74,7 @@ func min(a, b int) int {
 	return b
 }
 
+// 获取最长公共前缀
 func longestCommonPrefix(a, b string) int {
 	i := 0
 	max := min(len(a), len(b))
@@ -81,6 +84,7 @@ func longestCommonPrefix(a, b string) int {
 	return i
 }
 
+// william 添加子节点，如果有通配符子节点，则保持通配符子节点在最后一个
 // addChild will add a child node, keeping wildcardChild at the end
 func (n *node) addChild(child *node) {
 	if n.wildChild && len(n.children) > 0 {

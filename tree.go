@@ -95,6 +95,7 @@ func (n *node) addChild(child *node) {
 	}
 }
 
+// william
 func countParams(path string) uint16 {
 	var n uint16
 	s := bytesconv.StringToBytes(path)
@@ -119,10 +120,10 @@ const (
 
 type node struct {
 	path      string
-	indices   string
+	indices   string //todo 这是什么东西？
 	wildChild bool
 	nType     nodeType
-	priority  uint32
+	priority  uint32  //todo 这个又干啥了
 	children  []*node // child nodes, at most 1 :param style node at the end of the array
 	handlers  HandlersChain
 	fullPath  string
@@ -273,7 +274,7 @@ walk:
 // Returns -1 as index, if no wildcard was found.
 func findWildcard(path string) (wildcard string, i int, valid bool) {
 	// Find start
-	for start, c := range []byte(path) {
+	for start, c := range []byte(path) { //todo 这里为什么没有使用效率更高的方式
 		// A wildcard starts with ':' (param) or '*' (catch-all)
 		if c != ':' && c != '*' {
 			continue

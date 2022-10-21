@@ -114,6 +114,7 @@ func parseAccept(acceptHeader string) []string {
 	return out
 }
 
+//获取最后一个字节
 func lastChar(str string) uint8 {
 	if str == "" {
 		panic("The length of the string can't be 0")
@@ -125,6 +126,7 @@ func nameOfFunction(f any) string {
 	return runtime.FuncForPC(reflect.ValueOf(f).Pointer()).Name()
 }
 
+//合并路径
 func joinPaths(absolutePath, relativePath string) string {
 	if relativePath == "" {
 		return absolutePath
@@ -137,6 +139,7 @@ func joinPaths(absolutePath, relativePath string) string {
 	return finalPath
 }
 
+//默认8080端口
 func resolveAddress(addr []string) string {
 	switch len(addr) {
 	case 0:
@@ -153,6 +156,7 @@ func resolveAddress(addr []string) string {
 	}
 }
 
+// william 判断所有的rune是否都是ascii字符
 // https://stackoverflow.com/questions/53069040/checking-a-string-contains-only-ascii-characters
 func isASCII(s string) bool {
 	for i := 0; i < len(s); i++ {

@@ -44,9 +44,9 @@ type ResponseWriter interface {
 }
 
 type responseWriter struct {
-	http.ResponseWriter
-	size   int
-	status int
+	http.ResponseWriter // 返回是一个接口
+	size                int
+	status              int
 }
 
 var _ ResponseWriter = (*responseWriter)(nil)

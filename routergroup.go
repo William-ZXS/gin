@@ -51,6 +51,7 @@ type IRoutes interface {
 
 // RouterGroup is used internally to configure router, a RouterGroup is associated with
 // a prefix and an array of handlers (middleware).
+// 路由组 包函一个公共前缀和一组middleware
 type RouterGroup struct {
 	Handlers HandlersChain
 	basePath string

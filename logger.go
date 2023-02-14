@@ -179,6 +179,7 @@ func ErrorLoggerT(typ ErrorType) HandlerFunc {
 
 // Logger instances a Logger middleware that will write the logs to gin.DefaultWriter.
 // By default, gin.DefaultWriter = os.Stdout.
+// todo 学习middleware怎么写
 func Logger() HandlerFunc {
 	return LoggerWithConfig(LoggerConfig{})
 }

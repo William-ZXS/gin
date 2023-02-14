@@ -113,6 +113,7 @@ func (group *RouterGroup) POST(relativePath string, handlers ...HandlerFunc) IRo
 }
 
 // GET is a shortcut for router.Handle("GET", path, handlers).
+// 可以设置多个
 func (group *RouterGroup) GET(relativePath string, handlers ...HandlerFunc) IRoutes {
 	return group.handle(http.MethodGet, relativePath, handlers)
 }
@@ -242,6 +243,7 @@ func (group *RouterGroup) calculateAbsolutePath(relativePath string) string {
 	return joinPaths(group.basePath, relativePath)
 }
 
+// todo 返回的obj是什么
 func (group *RouterGroup) returnObj() IRoutes {
 	if group.root {
 		return group.engine

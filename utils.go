@@ -75,6 +75,7 @@ func (h H) MarshalXML(e *xml.Encoder, start xml.StartElement) error {
 	return e.EncodeToken(xml.EndElement{Name: start.Name})
 }
 
+// 这种模式挺好的，简约
 func assert1(guard bool, text string) {
 	if !guard {
 		panic(text)
@@ -114,7 +115,7 @@ func parseAccept(acceptHeader string) []string {
 	return out
 }
 
-//获取最后一个字节
+// 获取最后一个字节
 func lastChar(str string) uint8 {
 	if str == "" {
 		panic("The length of the string can't be 0")
@@ -126,7 +127,7 @@ func nameOfFunction(f any) string {
 	return runtime.FuncForPC(reflect.ValueOf(f).Pointer()).Name()
 }
 
-//合并路径
+// 合并路径
 func joinPaths(absolutePath, relativePath string) string {
 	if relativePath == "" {
 		return absolutePath
@@ -139,7 +140,7 @@ func joinPaths(absolutePath, relativePath string) string {
 	return finalPath
 }
 
-//默认8080端口
+// 默认8080端口
 func resolveAddress(addr []string) string {
 	switch len(addr) {
 	case 0:

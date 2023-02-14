@@ -84,7 +84,7 @@ func longestCommonPrefix(a, b string) int {
 	return i
 }
 
-// william 添加子节点，如果有通配符子节点，则保持通配符子节点在最后一个
+// 添加子节点，如果有通配符子节点，则保持通配符子节点在最后一个
 // addChild will add a child node, keeping wildcardChild at the end
 func (n *node) addChild(child *node) {
 	if n.wildChild && len(n.children) > 0 {
@@ -272,9 +272,11 @@ walk:
 
 // Search for a wildcard segment and check the name for invalid characters.
 // Returns -1 as index, if no wildcard was found.
+// 具名返回值
+// 查找通配符
 func findWildcard(path string) (wildcard string, i int, valid bool) {
 	// Find start
-	for start, c := range []byte(path) { //todo 这里为什么没有使用效率更高的方式
+	for start, c := range []byte(path) {
 		// A wildcard starts with ':' (param) or '*' (catch-all)
 		if c != ':' && c != '*' {
 			continue
@@ -310,6 +312,7 @@ func (n *node) insertChild(path string, fullPath string, handlers HandlersChain)
 		}
 
 		// check if the wildcard has a name
+		// 最少是两个字符
 		if len(wildcard) < 2 {
 			panic("wildcards must be named with a non-empty name in path '" + fullPath + "'")
 		}

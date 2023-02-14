@@ -44,6 +44,7 @@ var defaultTrustedCIDRs = []*net.IPNet{
 type HandlerFunc func(*Context)
 
 // HandlersChain defines a HandlerFunc slice.
+// todo 为什么要定义一个这样的类型
 type HandlersChain []HandlerFunc
 
 // Last returns the last handler in the chain. i.e. the last handler is the main one.
@@ -110,6 +111,7 @@ type Engine struct {
 	// match those stored at `(*gin.Engine).RemoteIPHeaders`. If no IP was
 	// fetched, it falls back to the IP obtained from
 	// `(*gin.Context).Request.RemoteAddr`.
+	// 这个配置会有什么用
 	ForwardedByClientIP bool
 
 	// AppEngine was deprecated.
@@ -149,7 +151,7 @@ type Engine struct {
 
 	// ContextWithFallback enable fallback Context.Deadline(), Context.Done(), Context.Err() and Context.Value() when Context.Request.Context() is not nil.
 	ContextWithFallback bool
-
+	// 模版分隔符 默认{{}}
 	delims           render.Delims
 	secureJSONPrefix string
 	HTMLRender       render.HTMLRender
@@ -166,6 +168,7 @@ type Engine struct {
 	trustedCIDRs     []*net.IPNet
 }
 
+// 保证Engine实现了IRouter
 var _ IRouter = (*Engine)(nil)
 
 // New returns a new blank Engine instance without any middleware attached.
@@ -234,6 +237,7 @@ func (engine *Engine) allocateContext(maxParams uint16) *Context {
 }
 
 // Delims sets template left and right delims and returns an Engine instance.
+// delimiter 分隔符
 func (engine *Engine) Delims(left, right string) *Engine {
 	engine.delims = render.Delims{Left: left, Right: right}
 	return engine
@@ -313,6 +317,7 @@ func (engine *Engine) rebuild404Handlers() {
 	engine.allNoRoute = engine.combineHandlers(engine.noRoute)
 }
 
+// method not allowed
 func (engine *Engine) rebuild405Handlers() {
 	engine.allNoMethod = engine.combineHandlers(engine.noMethod)
 }
@@ -321,10 +326,10 @@ func (engine *Engine) addRoute(method, path string, handlers HandlersChain) {
 	assert1(path[0] == '/', "path must begin with '/'")
 	assert1(method != "", "HTTP method can not be empty")
 	assert1(len(handlers) > 0, "there must be at least one handler")
-
 	debugPrintRoute(method, path, handlers)
 
 	root := engine.trees.get(method)
+	//如果还没有就新加一个节点
 	if root == nil {
 		root = new(node)
 		root.fullPath = "/"
